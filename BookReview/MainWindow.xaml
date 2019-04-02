@@ -5,8 +5,99 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BookReview"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="Book Review" MinHeight="480" MinWidth="640" Width="1024" Height="768" Background="White">
+
+    <!-- Title -->
+    <Grid Name="Dashboard" Height="Auto" Background="SlateBlue">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Headings -->
+
+        <Border Grid.Row="1" Grid.Column="0" Margin="8" CornerRadius="10" Background="DarkSlateBlue">
+            <TextBlock Text="Select Book" Grid.Column="0" Foreground="GhostWhite" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="DemiBold"/>
+        </Border>
+        <Border Grid.Row="1" Grid.Column="1" Margin="8" CornerRadius="10" Background="DarkSlateBlue">
+            <TextBlock Text="Book Information" Foreground="GhostWhite" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="DemiBold"/>
+        </Border>
+        <Border Grid.Row="1" Grid.Column="2" Margin="8" CornerRadius="10" Background="DarkSlateBlue">
+            <TextBlock Text="Review" Foreground="GhostWhite" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="DemiBold"/>
+        </Border>
+        <!-- Book Information Section -->
+
+        <Border Grid.Row="2" Grid.Column="1" Background="DarkSlateBlue" CornerRadius="10" Grid.RowSpan="2" Margin="2">
+            <StackPanel Background="DarkSlateBlue" VerticalAlignment="Center">
+                <Label Content="Book Title" Grid.Column="1" HorizontalAlignment="Center" Margin="0,10,0,0" Grid.Row="2" VerticalAlignment="Top" Foreground="GhostWhite" FontWeight="DemiBold" />
+                <TextBox Name="bookTitle" Grid.Column="1" Height="23" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" Foreground="GhostWhite" Background="SlateBlue"/>
+                <Label Content="Author" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Top" Foreground="GhostWhite" FontWeight="DemiBold"/>
+                <TextBox Name="author" Grid.Column="1" Height="23" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" Foreground="GhostWhite" Background="SlateBlue"/>
+                <Label Content="Synopsis" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Top" Foreground="GhostWhite" FontWeight="DemiBold"/>
+                <TextBox Name="synopsis" Height="Auto" Grid.Column="1" MinWidth="230" MinHeight="50" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="GhostWhite" Background="SlateBlue" Margin="10,0"/>
+                <Separator Margin="50 20 50 10"/>
+                <Label Name="review" Content="Review:" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="GhostWhite" FontWeight="DemiBold"/>
+                <TextBox Grid.Column="1" MinWidth="230" IsEnabled="False" MinHeight="50" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="GhostWhite" Background="SlateBlue" Margin="10,0" Height="Auto"  />
+                <TextBlock Text="This button will save any changes made to the selected book or review to the database." TextWrapping="Wrap" Foreground="GhostWhite" Margin="20 10 20 0"/>
+                <Button Content="Save Changes" Height="30" Margin="40 20 40 20" Background="SlateBlue" Foreground="GhostWhite"/>
+                <!--<Label Grid.Column="1" Content="Marks out of 5" FontWeight="DemiBold" Foreground="GhostWhite"/>
+                    <TextBox Name="Rating" Grid.Column="1" Width="30" Height="30" FontWeight="DemiBold" Text="5" HorizontalAlignment="Center" FontSize="25" Foreground="GhostWhite" BorderBrush="DarkSlateBlue" Background="DarkSlateBlue"/> -->
+            </StackPanel>
+        </Border>
+
+
+        <!-- Review Section-->
+
+        <Border Grid.Row="2" Grid.Column="2" CornerRadius="10" Margin="2" Background="DarkSlateBlue" Grid.RowSpan="2">
+            <StackPanel Background="DarkSlateBlue" VerticalAlignment="Center">
+                <Label Content="Book Title" Grid.Column="2" HorizontalAlignment="Center" Margin="0,10,0,0" Grid.Row="2" VerticalAlignment="Top" Foreground="GhostWhite" FontWeight="DemiBold" />
+                <TextBox Name="newBookTitle" Grid.Column="2" Height="23" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" Foreground="GhostWhite" Background="SlateBlue"/>
+                <Label Content="Author" Grid.Column="2" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Top" Foreground="GhostWhite" FontWeight="DemiBold"/>
+                <TextBox Name="newAuthor" Grid.Column="2" Height="23" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" Foreground="GhostWhite" Background="SlateBlue"/>
+                <Label Content="Synopsis" Grid.Column="2" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Top" Foreground="GhostWhite" FontWeight="DemiBold"/>
+                <TextBox Name="newSynopsis" Grid.Column="2" MinWidth="230" MinHeight="50" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="GhostWhite" Background="SlateBlue" Margin="10,0" Height="Auto"/>
+                <Separator Margin="50 20 50 10"/>
+                <Label Name="newReview" Content="Review:" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="GhostWhite" FontWeight="DemiBold"/>
+                <TextBox Grid.Column="2" MinWidth="230" MinHeight="50" IsEnabled="False" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="GhostWhite" Background="SlateBlue" Margin="10,0" Height="Auto"/>
+                <TextBlock Foreground="GhostWhite" Margin="20 10 20 0" Text="This button will add a new book to the database. Make sure Author name matches any previous entries." TextWrapping="Wrap"/>
+                <Button Content="Save Changes" Height="30" Margin="40 20 40 20" Background="SlateBlue" Foreground="GhostWhite" Click="AddBook"/>
+                <StackPanel/>
+
+            </StackPanel>
+        </Border>
+        <!--<Button Content="Save Review" Grid.Column="2" HorizontalAlignment="Center" Margin="94,5,84,0" Grid.Row="4" VerticalAlignment="Top" Width="230" Height="30" Background="DarkSlateBlue" Foreground="GhostWhite"/>-->
+
+        <Grid Grid.Row="2" Grid.Column="0" Grid.RowSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition MinHeight="325" Height="1*"/>
+                <RowDefinition MinHeight="325" Height="1*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Row="0" Grid.Column="0">
+                <Border Grid.Row="1" Grid.Column="0" Margin="8" CornerRadius="10" Background="DarkSlateBlue">
+                    <TextBlock Text="Books" Margin="5" Foreground="GhostWhite" HorizontalAlignment="Center" FontWeight="DemiBold"/>
+                </Border>
+                <ListBox Name="listBooks" Width="200" MinHeight="150" Height="Auto" Background="SlateBlue" Foreground="GhostWhite" SelectionChanged="ListBooks_SelectionChanged"/>
+                <Button Content="Delete Book" Height="30" Margin="10" Background="DarkSlateBlue" Foreground="GhostWhite" Click="Delete_Book"/>
+            </StackPanel>
+            <StackPanel Grid.Row="1" Grid.Column="0">
+                <Border Grid.Row="1" Grid.Column="0" Margin="8" CornerRadius="10" Background="DarkSlateBlue">
+                    <TextBlock Text="Authors" Margin="5" Foreground="GhostWhite" HorizontalAlignment="Center" FontWeight="DemiBold"/>
+                </Border>
+                <ListBox Name="listAuthors" Width="200" MinHeight="150" Height="Auto" Background="SlateBlue" Foreground="GhostWhite" SelectionChanged="ListAuthors_SelectionChanged"/>
+                <Button Content="Delete Author" Height="30" Margin="10" Background="DarkSlateBlue" Foreground="GhostWhite" Click="Delete_Author"/>
+            </StackPanel>
+        </Grid>
+        <Button Name="Exit" Grid.Column="0" Grid.Row="4" Margin="5,0,5,5" VerticalAlignment="Bottom" Content="Exit" Background="DarkSlateBlue" Foreground="GhostWhite" Height="30"/>
     </Grid>
 </Window>
