@@ -17,9 +17,9 @@
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"/>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*" MinWidth="150" MaxWidth="300"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
 
         <!-- Headings -->
@@ -83,21 +83,21 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <StackPanel Grid.Row="0" Grid.Column="0">
+            <StackPanel Grid.Row="0" Grid.Column="0" Height="Auto" CanVerticallyScroll="True">
                 <Border Grid.Row="1" Grid.Column="0" Margin="8" CornerRadius="10" Background="DarkSlateBlue">
                     <TextBlock Text="Books" Margin="5" Foreground="GhostWhite" HorizontalAlignment="Center" FontWeight="DemiBold"/>
                 </Border>
-                <ListBox Name="listBooks" Width="200" MinHeight="150" Height="Auto" Background="SlateBlue" Foreground="GhostWhite" SelectionChanged="ListBooks_SelectionChanged"/>
+                <ListBox Name="listBooks" Width="Auto" MinHeight="150" MaxHeight="440" Background="SlateBlue" Foreground="GhostWhite" SelectionChanged="ListBooks_SelectionChanged" ScrollViewer.VerticalScrollBarVisibility="Visible"/>
                 <Button Content="Delete Book" Height="30" Margin="10" Background="DarkSlateBlue" Foreground="GhostWhite" Click="Delete_Book"/>
             </StackPanel>
-            <StackPanel Grid.Row="1" Grid.Column="0">
+            <StackPanel Grid.Row="1" Grid.Column="0" Height="Auto">
                 <Border Grid.Row="1" Grid.Column="0" Margin="8" CornerRadius="10" Background="DarkSlateBlue">
                     <TextBlock Text="Authors" Margin="5" Foreground="GhostWhite" HorizontalAlignment="Center" FontWeight="DemiBold"/>
                 </Border>
-                <ListBox Name="listAuthors" Width="200" MinHeight="150" Height="Auto" Background="SlateBlue" Foreground="GhostWhite" SelectionChanged="ListAuthors_SelectionChanged"/>
+                <ListBox Name="listAuthors"  MinHeight="150" Height="Auto" Width="Auto" MaxHeight="440" Background="SlateBlue" Foreground="GhostWhite" SelectionChanged="ListAuthors_SelectionChanged"  ScrollViewer.VerticalScrollBarVisibility="Visible"/>
                 <Button Content="Delete Author" Height="30" Margin="10" Background="DarkSlateBlue" Foreground="GhostWhite" Click="Delete_Author"/>
             </StackPanel>
         </Grid>
-        <Button Name="Exit" Grid.Column="0" Grid.Row="4" Margin="5,0,5,5" VerticalAlignment="Bottom" Content="Exit" Background="DarkSlateBlue" Foreground="GhostWhite" Height="30"/>
+        <Button Name="Exit" Grid.Column="0" Grid.Row="4" Margin="5,0,5,5" VerticalAlignment="Bottom" Content="Exit" Background="DarkSlateBlue" Foreground="GhostWhite" Height="30" Click="Exit_Click"/>
     </Grid>
 </Window>

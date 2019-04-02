@@ -11,12 +11,13 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace BookReview
 {
@@ -25,6 +26,7 @@ namespace BookReview
     /// </summary>
     public partial class MainWindow : Window
     {
+        int size = 200;
 
         SqlConnection sqlConnection;
 
@@ -232,10 +234,26 @@ namespace BookReview
             {
                 // Causes some issues.
 
-                MessageBox.Show("ShowAssociatedAnimals" + e2.ToString());
+                // MessageBox.Show("ShowAssociatedAnimals" + e2.ToString());
             }
         }
 
+        private void Exit_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Am I bothering you? Do you want me to leave?",
+                "The Question",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question,
+                MessageBoxDefaultButton.Button2);
+            //
+            // Test the results of the previous three dialogs.
+            //
+            if (result.ToString() == "Yes")
+            {
+                MessageBox.Show("You answered yes, so now I must go. Goodbye.");
+                this.Close();
+            }
+        }
     }
 }
 #endregion
