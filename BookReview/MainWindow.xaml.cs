@@ -55,7 +55,7 @@ namespace BookReview
             {
                 // If Author already exists, get ID, add AuthorID + BookID to BookAuthor table. Lol
                 // Otherwise add new AuthorID & Book ID to table.
-                string authorQuery = "insert into Author values (@AuthorName); insert into Book values (@Title, @Synopsis)";
+                string authorQuery = "insert into Author values (@AuthorName); search ; insert into Book values (@Title, @Synopsis)";
 
                 SqlCommand sqlCommand = new SqlCommand(authorQuery, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("@AuthorName", newAuthor.Text);
@@ -77,7 +77,7 @@ namespace BookReview
             }
         }
 
-
+        // If you click a book in the list, the information in the first pane should change to reflect that.
         private void ListBooks_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
@@ -118,7 +118,40 @@ namespace BookReview
             }
         }
 
+        private void ListAuthors_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                string query = "select * from Book b inner join BookAuthor ba on b.Id = ba.BookId where ba.AuthorId = @AuthorId";
 
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                // the SqlDataAdapter can be imagined like an Interface to make Tables usable by C#-Objects
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+
+                using (sqlDataAdapter)
+                {
+
+                    sqlCommand.Parameters.AddWithValue("@AuthorId", listAuthors.SelectedValue);
+
+                    DataTable bookDataTable = new DataTable();
+
+                    sqlDataAdapter.Fill(bookDataTable);
+
+                    //Which Information of the Table in DataTable should be shown in our ListBox?
+                    listBooks.DisplayMemberPath = "Title";
+                    //Which Value should be delivered, when an Item from our ListBox is selected?
+                    listBooks.SelectedValuePath = "Id";
+                    //The Reference to the Data the ListBox should populate
+                    listBooks.ItemsSource = bookDataTable.DefaultView;
+                }
+            }
+            catch (Exception e2)
+            {
+                // Causes some issues.
+
+                // MessageBox.Show("ShowAssociatedAnimals" + e2.ToString());
+            }
+        }
         #endregion
         #region       // Not working at all
         private void Delete_Book(object sender, RoutedEventArgs e)
@@ -152,6 +185,7 @@ namespace BookReview
 
 
         #endregion
+
 
         #region Can forget about these
         // Perfect
@@ -200,41 +234,6 @@ namespace BookReview
             catch (Exception e)
             {
                 MessageBox.Show("Error: " + e);
-            }
-        }
-
-        private void ListAuthors_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            try
-            {
-                string query = "select * from Book b inner join BookAuthor ba on b.Id = ba.BookId where ba.AuthorId = @AuthorId";
-
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-                // the SqlDataAdapter can be imagined like an Interface to make Tables usable by C#-Objects
-                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
-
-                using (sqlDataAdapter)
-                {
-
-                    sqlCommand.Parameters.AddWithValue("@AuthorId", listAuthors.SelectedValue);
-
-                    DataTable bookDataTable = new DataTable();
-
-                    sqlDataAdapter.Fill(bookDataTable);
-
-                    //Which Information of the Table in DataTable should be shown in our ListBox?
-                    listBooks.DisplayMemberPath = "Title";
-                    //Which Value should be delivered, when an Item from our ListBox is selected?
-                    listBooks.SelectedValuePath = "Id";
-                    //The Reference to the Data the ListBox should populate
-                    listBooks.ItemsSource = bookDataTable.DefaultView;
-                }
-            }
-            catch (Exception e2)
-            {
-                // Causes some issues.
-
-                // MessageBox.Show("ShowAssociatedAnimals" + e2.ToString());
             }
         }
 
